@@ -4,6 +4,7 @@
 #include "afn.h"
 
 #define MAX 100
+#define MAX_ESTADOS 500
 
 
 /*Guardamos los autómatas creados en una pila*/
@@ -228,17 +229,87 @@ void imprimirAFN(AFN a)
     printf("===== FIN AFN =====\n");
 }
 
-int main()
+void epsilonCierre(Estado *e, Estado **conjunto, int *n, int *visitado)
 {
-    char postfija[200];
+    if (!e) return;
 
-    printf("Ingresa expresion postfija: ");
-    scanf("%199s", postfija);
+    if (visitado[e->id])
+        return;
 
-    AFN a = regexAFN(postfija);
+    visitado[e->id] = 1;
 
-    imprimirAFN(a);
+    conjunto[(*n)++] = e;
+
+    if (e->simbolo == 0) // epsilon
+    {
+        epsilonCierre(e->salida1, conjunto, n, visitado);
+        epsilonCierre(e->salida2, conjunto, n, visitado);
+    }
+}
+
+
+void mover(Estado **actuales, int n,
+           char simbolo,
+           Estado **resultado, int *m)
+{
+    *m = 0;
+
+    for (int i = 0; i < n; i++)
+    {
+        Estado *e = actuales[i];
+
+        if (e->simbolo == simbolo && e->salida1)
+        {
+            resultado[(*m)++] = e->salida1;
+        }
+    }
+}
+
+int evaluarAFN(AFN a, char *cadena)
+{
+    Estado *actuales[MAX_ESTADOS];
+    Estado *siguientes[MAX_ESTADOS];
+
+    int nActual = 0;
+    int nSig = 0;
+
+    int visitado[MAX_ESTADOS];
+
+    /* Cierre inicial */
+    for (int i = 0; i < MAX_ESTADOS; i++)
+        visitado[i] = 0;
+
+    epsilonCierre(a.inicio, actuales, &nActual, visitado);
+
+    /* Procesar cadena */
+    for (int i = 0; cadena[i]; i++)
+    {
+        char c = cadena[i];
+
+        /* Mover con símbolo */
+        mover(actuales, nActual, c, siguientes, &nSig);
+
+        /* Nuevo cierre */
+        nActual = 0;
+
+        for (int j = 0; j < MAX_ESTADOS; j++)
+            visitado[j] = 0;
+
+        for (int j = 0; j < nSig; j++)
+        {
+            epsilonCierre(siguientes[j], actuales, &nActual, visitado);
+        }
+
+        if (nActual == 0)
+            return 0; // muerto
+    }
+
+    /* Ver si llegamos al final */
+    for (int i = 0; i < nActual; i++)
+    {
+        if (actuales[i] == a.fin)
+            return 1;
+    }
 
     return 0;
 }
-

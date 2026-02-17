@@ -5,19 +5,12 @@
 
 #define MAX 100
 
-/* Pila que recibira las operaciones dentron de la expresión regular */
-typedef struct 
-{
-    //Guardara las operaciones
-    char op[MAX];
-    int tope;
-} Pila;
+
 
 /* Método que crea la pila */
-int crear(Pila *p)
+void crear(Pila *p)
 {
     p->tope = -1;
-    return 1;
 }
 
 int vacia(Pila *p)
@@ -85,7 +78,8 @@ void insertarConcat(char *infija, char *salida)
     int i,j = 0;
     int longitud = strlen(infija);
 
-    for(i = 0; i < longitud; i++){
+    for(i = 0; i < longitud; i++)
+    {
         char c1 = infija[i];
         char c2 = infija[i + 1];
 
@@ -154,26 +148,3 @@ int postfija(char *infija, char *postfija)
     postfija[j++] = '\0';
 }
 
-
-int main() {
-
-    char infix[MAX];
-    char withConcat[MAX];
-    char postfix[MAX];
-
-    printf("Ingresa expresion regular: ");
-    fgets(infix, MAX, stdin);
-
-    /* Quitar salto de línea */
-    infix[strcspn(infix, "\n")] = 0;
-
-    insertarConcat(infix, withConcat);
-
-    postfija(withConcat, postfix);
-
-    printf("\nInfija original : %s\n", infix);
-    printf("Con concat '.'  : %s\n", withConcat);
-    printf("Postfija        : %s\n", postfix);
-
-    return 0;
-}
