@@ -8,7 +8,29 @@
 
 #define MAX 500
 
-
+/**
+ * @brief Función principal del programa regex_to_nfa.
+ *
+ * Este programa permite realizar dos operaciones principales:
+ *
+ * 1) Conversión de una expresión regular a notación postfija
+ *    con concatenación explícita (-r).
+ *
+ * 2) Validación de cadenas de texto mediante un AFN construido
+ *    a partir de una expresión regular (-t).
+ *
+ * El programa recibe la entrada estándar (stdin), lo que permite
+ * su uso mediante pipes en sistemas Unix/Linux y Windows.
+ *
+ * Uso:
+ *   ./regex_to_nfa -r   (convierte regex a postfija)
+ *   ./regex_to_nfa -t   (valida cadenas con AFN)
+ *
+ * @param argc Número de argumentos de línea de comandos.
+ * @param argv Arreglo de argumentos de línea de comandos.
+ *
+ * @return 0 si la ejecución es exitosa, 1 en caso de error.
+ */
 int main(int argc, char *argv[])
 {
     if (argc != 2)
@@ -22,9 +44,6 @@ int main(int argc, char *argv[])
     char post[MAX];
     char cadena[MAX];
 
-    /* =======================
-       MODO: REGEX → POSTFIJA
-       ======================= */
     if (strcmp(argv[1], "-r") == 0)
     {
         /* Leer regex desde stdin */
@@ -44,9 +63,6 @@ int main(int argc, char *argv[])
     }
 
 
-    /* =======================
-       MODO: VALIDAR CADENAS
-       ======================= */
     else if (strcmp(argv[1], "-t") == 0)
     {
         /* Leer regex */
@@ -77,9 +93,6 @@ int main(int argc, char *argv[])
     }
 
 
-    /* =======================
-       ERROR
-       ======================= */
     else
     {
         fprintf(stderr, "Opción inválida: %s\n", argv[1]);
