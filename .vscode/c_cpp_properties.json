@@ -3,7 +3,8 @@
         {
             "name": "Linux",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/compilers_lab/regex_to_nfa/include"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",
