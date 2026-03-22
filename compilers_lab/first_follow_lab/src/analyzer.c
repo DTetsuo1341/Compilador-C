@@ -116,7 +116,6 @@ static bool compute_first_tables(const grammar *g, bool **first_table, bool **nu
 			for(int i = 0; i < produccion.production_length; i++)
 			{
 				int simId = produccion.production_symbol_ids[i];
-
 				/* Terminal */
 				if(simId < terminal)
 				{	
