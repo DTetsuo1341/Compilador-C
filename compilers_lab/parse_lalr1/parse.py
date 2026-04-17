@@ -2,6 +2,18 @@ import json
 import sys
 
 def cargar_gramatica(archivo_gramatica):
+    """
+    Read the archive that have the grammar ignoring the declaration of terminal and non-terminal
+    symbols, and calculate the lenght of the right side of the producction to know haow many states
+    to pop
+
+    Args:
+        archivo_gramatica (str): File path of the .txt with the grammar.
+
+    Returns:
+        dict: A dicctionary with id the number of the production, and a tuple
+        (Non-terminal left side of production, lenght of right side of the production).
+    """
     producciones = {}
     prod_id = 0
     
@@ -29,6 +41,16 @@ def cargar_gramatica(archivo_gramatica):
 
 
 def parse(archivo_json, archivo_gramatica, cadena):
+    """
+    Acts like the LALR(1) machine using the parse table.
+    Args:
+        archivo_json (str): File path of the .json with the parse table.
+        archivo_gramatica (str): File path of the .txt with the grammar.
+        cadena (str): String of symbols to check.
+
+    Returns:
+        bool: True if the string is accepted by the grammar, False in other case.
+    """
     producciones = cargar_gramatica(archivo_gramatica)
 
     #Get the file
@@ -93,7 +115,7 @@ def parse(archivo_json, archivo_gramatica, cadena):
             if num_pop > 0:
                 pila = pila[:-num_pop]
             
-            #Get the top of the stack of states, and the index of the
+            #Get the state 0, and the index of the
             #non-terminal symbol
             tope = pila[-1]
             indice_noT = no_terminales.index(izq)
@@ -116,6 +138,6 @@ def parse(archivo_json, archivo_gramatica, cadena):
 if __name__ == "__main__":
     if len(sys.argv) < 4:
         print("Uso: python parse.py <tabla.json> <gramatica.txt> \"<cadena a evaluar>\"")
-        print("Ejemplo: python parse.py tabla.json gramatica.txt \"a a * a +\"")
+        print("Ejemplo: python parse.py tablas/tablaCruzCampos.json gramaticas/gramaticaCruzCampos.txt \"a a * a +\"")
     else:
         parse(sys.argv[1], sys.argv[2], sys.argv[3])
