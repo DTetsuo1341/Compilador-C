@@ -15,7 +15,7 @@ for grammar_dir in "$EXAMPLES_DIR"/*/; do
     echo "Grammar: $grammar_file"
  
     # Iterate over all input files (named input<N> or just input*)
-    for input_file in "$grammar_dir"input*; do
+    for input_file in "$grammar_dir"*.c; do
         [[ -f "$input_file" ]] || continue
  
         output_file="${grammar_dir}parseTable.json"
