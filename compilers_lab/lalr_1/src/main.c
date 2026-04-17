@@ -340,6 +340,7 @@ static bool next_token(const grammar *g, token_stream *out_token)
  */
 static bool parse_token_stream(const grammar *g, const parser_table *table)
 {
+    
     if (g == NULL || table == NULL)
     {
         return false;
