@@ -340,63 +340,77 @@ static bool next_token(const grammar *g, token_stream *out_token)
  */
 static bool parse_token_stream(const grammar *g, const parser_table *table)
 {
-    if (g == NULL || table == NULL)
-    {
-        return false;
-    }
+    if (g == NULL || table == NULL) return false;
 
     parser_stack stack;
-    if (!init_parser_stack(&stack))
-    {
-        return false;
-    }
+    if (!init_parser_stack(&stack)) return false;
 
     token_stream lookahead;
     if (!next_token(g, &lookahead))
     {
         fprintf(stderr, "Lexer token could not be mapped to grammar terminal: '%s' (token=%d)\n",
-                yytext != NULL ? yytext : "",
-                lookahead.lexer_token);
+                yytext != NULL ? yytext : "", lookahead.lexer_token);
         free_parser_stack(&stack);
         return false;
     }
 
+    #define RESET  "\033[0m"
+    #define CYAN   "\033[96m"
+    #define YELLOW "\033[93m"
+    #define GREEN  "\033[92m"
+    #define RED    "\033[91m"
+    #define DIM    "\033[2m"
+
+    int step = 0;
+    printf(DIM " Step  State  Lookahead       Action\n"
+               " ────  ─────  ──────────────  ──────────────────────────────\n" RESET);
+
     while (true)
     {
         int state_id = top_state(&stack);
+        const char *la = (lookahead.lexeme && *lookahead.lexeme) ? lookahead.lexeme : "$";
         parser_action action = get_parser_action(table, state_id, lookahead.terminal_id);
+
+        printf(" %-5d  %-5d  %-14s  ", ++step, state_id, la);
 
         if (action.type == PARSER_ACTION_SHIFT)
         {
+            printf(CYAN "SHIFT → state %d\n" RESET, action.value);
             if (!push_state(&stack, action.value))
             {
                 fprintf(stderr, "Parser stack overflow while shifting.\n");
                 free_parser_stack(&stack);
                 return false;
             }
-
             if (!next_token(g, &lookahead))
             {
                 fprintf(stderr, "Lexer token could not be mapped to grammar terminal: '%s' (token=%d)\n",
-                        yytext != NULL ? yytext : "",
-                        lookahead.lexer_token);
+                        yytext != NULL ? yytext : "", lookahead.lexer_token);
                 free_parser_stack(&stack);
                 return false;
             }
-
             continue;
         }
 
         if (action.type == PARSER_ACTION_REDUCE)
         {
+            production p = g->productions[action.value];
+            printf(YELLOW "REDUCE p%d  %s →", action.value, g->non_terminals[p.non_terminal_id].symbol);
+            for (int i = 0; i < p.production_length; i++)
+            {
+                int sym_id = p.production_symbol_ids[i];
+                printf(" %s", sym_id < g->num_terminals
+                    ? g->terminals[sym_id].symbol
+                    : g->non_terminals[sym_id - g->num_terminals].symbol);
+            }
+            printf("\n" RESET);
+
             if (action.value < 0 || action.value >= g->num_productions)
             {
                 fprintf(stderr, "Invalid reduction production index: %d\n", action.value);
                 free_parser_stack(&stack);
                 return false;
             }
-
-            production p = g->productions[action.value];
             int pop_count = reduction_pop_count(g, p);
             if (!pop_states(&stack, pop_count))
             {
@@ -404,42 +418,34 @@ static bool parse_token_stream(const grammar *g, const parser_table *table)
                 free_parser_stack(&stack);
                 return false;
             }
-
             int goto_from = top_state(&stack);
             int goto_state = get_parser_goto(table, goto_from, p.non_terminal_id);
             if (goto_state < 0)
             {
-                fprintf(stderr,
-                        "Missing GOTO[%d, %s] after reduction p%d\n",
-                        goto_from,
-                        g->non_terminals[p.non_terminal_id].symbol,
-                        action.value);
+                fprintf(stderr, "Missing GOTO[%d, %s] after reduction p%d\n",
+                        goto_from, g->non_terminals[p.non_terminal_id].symbol, action.value);
                 free_parser_stack(&stack);
                 return false;
             }
-
             if (!push_state(&stack, goto_state))
             {
                 fprintf(stderr, "Parser stack overflow after reduction.\n");
                 free_parser_stack(&stack);
                 return false;
             }
-
             continue;
         }
 
         if (action.type == PARSER_ACTION_ACCEPT)
         {
+            printf(GREEN "ACCEPT ✓\n" RESET);
             free_parser_stack(&stack);
             return true;
         }
 
-        fprintf(stderr,
-                "Syntax error at token '%s' (lexer=%d, terminal=%d) in state %d\n",
-                lookahead.lexeme,
-                lookahead.lexer_token,
-                lookahead.terminal_id,
-                state_id);
+        printf(RED "ERROR\n" RESET);
+        fprintf(stderr, "Syntax error at token '%s' (lexer=%d, terminal=%d) in state %d\n",
+                lookahead.lexeme, lookahead.lexer_token, lookahead.terminal_id, state_id);
         free_parser_stack(&stack);
         return false;
     }

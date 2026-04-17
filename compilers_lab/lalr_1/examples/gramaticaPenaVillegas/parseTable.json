@@ -4,7 +4,7 @@
   "numNonTerminals": 2,
   "hasConflicts": false,
   "numConflicts": 0,
-  "terminals": ["^", "p", "q", "$"],
+  "terminals": ["/", "p", "q", "$"],
   "nonTerminals": ["S", "B"],
   "action": [
     [{"type":"ERROR","value":-1}, {"type":"ERROR","value":-1}, {"type":"SHIFT","value":1}, {"type":"ERROR","value":-1}],
