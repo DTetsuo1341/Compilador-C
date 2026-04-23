@@ -51,6 +51,24 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
+# Bison generated
+parser.tab.c
+parser.tab.h
+*.tab.c
+*.tab.h
+ 
+# Flex generated
+lex.yy.c
+ 
+# Binaries
+zap
+*.o
+*.out
+a.out
+ 
+# Graphviz
+*.dot
+
 # debug information files
 *.dwo
 
