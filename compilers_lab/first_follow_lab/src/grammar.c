@@ -141,11 +141,11 @@ grammar *create_grammar(const char *grammar_file_content)
     // Split the grammar file content into lines
     char *lines[MAX_PRODUCTIONS + 2];
     int num_lines = 0;
-    char *line = strtok(grammar_copy, "\n");
-    while (line != NULL && num_lines < MAX_PRODUCTIONS + 2)
+    char *linea = strtok(grammar_copy, "\n");
+    while (linea != NULL && num_lines < MAX_PRODUCTIONS + 2)
     {
-        lines[num_lines++] = line;
-        line = strtok(NULL, "\n");
+        lines[num_lines++] = linea;
+        linea = strtok(NULL, "\n");
     }
 
     // Create a grammar object
@@ -186,8 +186,8 @@ grammar *create_grammar(const char *grammar_file_content)
 }
 
 /**
- * @brief Parses a symbol declaration line into a symbol array.
- * @param symbols_line Source line (for example terminals/non-terminals line).
+ * @brief Parses a symbol declaration linea into a symbol array.
+ * @param symbols_line Source linea (for example terminals/non-terminals linea).
  * @param symbols_count Output number of parsed symbols.
  * @param is_terminal Terminal flag to assign to parsed symbols.
  * @return Allocated symbol array, or NULL on failure.
@@ -199,14 +199,14 @@ static symbol *get_symbols_from_line(const char *symbols_line, int *symbols_coun
         return NULL;
     }
 
-    // Copy the line for counting tokens.
+    // Copy the linea for counting tokens.
     char *count_copy = strdup(symbols_line);
     if (count_copy == NULL)
     {
         return NULL;
     }
 
-    // Split the symbols line into symbols
+    // Split the symbols linea into symbols
     char *token = strtok(count_copy, " ");
     int count = 0;
 
@@ -228,7 +228,7 @@ static symbol *get_symbols_from_line(const char *symbols_line, int *symbols_coun
         return NULL;
     }
 
-    // Copy the line again because strtok already modified the first copy.
+    // Copy the linea again because strtok already modified the first copy.
     char *fill_copy = strdup(symbols_line);
     if (fill_copy == NULL)
     {
@@ -259,17 +259,17 @@ static symbol *get_symbols_from_line(const char *symbols_line, int *symbols_coun
 }
 
 /**
- * @brief Parses one production line into encoded production ids.
- * @param production_line Source production line.
+ * @brief Parses one production linea into encoded production ids.
+ * @param production_line Source production linea.
  * @param g Grammar context for symbol resolution.
  * @return Parsed production structure.
  */
 static production get_production_from_line(const char *production_line, grammar *g)
 {
-    // Copy the production line to avoid modifying the original string
+    // Copy the production linea to avoid modifying the original string
     char *production_line_duplicate = strdup(production_line);
 
-    // Split the production line into parts
+    // Split the production linea into parts
     char *token = strtok((char *)production_line_duplicate, " ");
     int non_terminal_id = get_symbol_id_from_hash(token, &g->non_terminal_index);
 
@@ -311,7 +311,7 @@ static production get_production_from_line(const char *production_line, grammar 
     p.production_symbol_ids = production_symbol_ids;
     p.production_length = production_length;
 
-    // Free the copied line
+    // Free the copied linea
     free(production_line_duplicate);
 
     return p;

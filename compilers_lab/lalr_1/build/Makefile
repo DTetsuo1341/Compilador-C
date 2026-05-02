@@ -31,7 +31,7 @@ default_target: all
 
 .SUFFIXES: .hpux_make_needs_suffix_list
 
-# Command-line flag to silence nested $(MAKE).
+# Command-linea flag to silence nested $(MAKE).
 $(VERBOSE)MAKESILENT = -s
 
 #Suppress display of executed commands.

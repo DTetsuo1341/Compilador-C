@@ -1,6 +1,5 @@
-#linea 1 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/build/scanner.c"
 
-#linea 3 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/build/scanner.c"
+#line 2 "lex.yy.c"
 
 #define  YY_INT_ALIGNED short int
 
@@ -232,13 +231,13 @@ struct yy_buffer_state
 	 */
 	int yy_is_interactive;
 
-	/* Whether we're considered to be at the beginning of a linea.
+	/* Whether we're considered to be at the beginning of a line.
 	 * If so, '^' rules will be active on the next match, otherwise
 	 * not.
 	 */
 	int yy_at_bol;
 
-    int yy_bs_lineno; /**< The linea count. */
+    int yy_bs_lineno; /**< The line count. */
     int yy_bs_column; /**< The column count. */
 
 	/* Whether to try to fill the input buffer when we reach the
@@ -374,8 +373,8 @@ static void yynoreturn yy_fatal_error ( const char* msg  );
 	(yy_hold_char) = *yy_cp; \
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
-#define YY_NUM_RULES 55
-#define YY_END_OF_BUFFER 56
+#define YY_NUM_RULES 44
+#define YY_END_OF_BUFFER 45
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -383,22 +382,15 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static const flex_int16_t yy_accept[122] =
+static const flex_int16_t yy_accept[70] =
     {   0,
-        0,    0,    0,    0,   56,   54,    6,    6,   35,   54,
-       40,   54,   54,   41,   42,   38,   36,   47,   37,   39,
-       50,   48,   33,   32,   34,   53,   45,   46,   53,   53,
-       53,   53,   53,   53,   53,   53,   53,   43,   54,   44,
-        4,    3,    4,    6,   27,    0,   52,    0,   25,   30,
-        0,    0,   23,   19,   21,   20,   22,    1,    5,   24,
-       49,   50,    0,   28,   26,   29,   53,   53,   53,   53,
-       53,   53,   53,   53,   12,   53,   53,   53,   53,   31,
-        2,   51,    5,   49,    0,    0,   49,   53,   53,   53,
-       53,   53,   53,   15,    7,   53,   53,   53,    0,   49,
-
-       53,   10,   53,   53,   13,   53,   53,   11,   53,   17,
-       53,   53,    8,   53,   14,   53,    9,   16,   53,   18,
-        0
+        0,    0,   45,   43,    2,    2,   43,   43,    1,   32,
+       36,   37,   30,   28,   40,   29,   31,   20,   41,   27,
+       33,   26,   42,   18,   17,   38,   39,   42,   42,   42,
+       42,   42,   42,   42,   42,   42,   34,   35,    2,   23,
+        0,   21,    1,    0,   20,   25,   22,   24,   42,   42,
+        6,    9,   10,   42,   13,   12,    8,   42,   15,   16,
+       14,   42,   11,   19,    7,    4,    3,    5,    0
     } ;
 
 static const YY_CHAR yy_ec[256] =
@@ -406,17 +398,17 @@ static const YY_CHAR yy_ec[256] =
         1,    1,    1,    1,    1,    1,    1,    1,    2,    3,
         1,    1,    2,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    2,    4,    5,    1,    1,    6,    7,    8,    9,
-       10,   11,   12,   13,   14,   15,   16,   17,   17,   17,
-       17,   17,   17,   17,   17,   17,   17,    1,   18,   19,
-       20,   21,    1,    1,   22,   22,   22,   22,   23,   22,
-       22,   22,   22,   22,   22,   22,   22,   22,   22,   22,
-       22,   22,   22,   22,   22,   22,   22,   22,   22,   22,
-       24,   25,   26,    1,   22,    1,   27,   28,   29,   30,
+        1,    2,    4,    5,    6,    1,    7,    1,    1,    8,
+        9,   10,   11,   12,   13,   14,   15,   16,   16,   16,
+       16,   16,   16,   16,   16,   16,   16,    1,   17,   18,
+       19,   20,    1,    1,   21,   21,   21,   21,   21,   22,
+       21,   21,   21,   21,   21,   21,   21,   21,   21,   21,
+       21,   21,   21,   23,   21,   21,   21,   21,   21,   21,
+       24,    1,   25,    1,   21,    1,   26,   27,   21,   28,
 
-       31,   32,   22,   33,   34,   22,   35,   36,   22,   37,
-       38,   22,   22,   39,   40,   41,   42,   43,   44,   22,
-       22,   22,   45,   46,   47,    1,    1,    1,    1,    1,
+       29,   30,   21,   31,   32,   21,   21,   33,   21,   34,
+       35,   36,   21,   37,   38,   39,   21,   21,   40,   21,
+       21,   21,   41,    1,   42,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -433,111 +425,81 @@ static const YY_CHAR yy_ec[256] =
         1,    1,    1,    1,    1
     } ;
 
-static const YY_CHAR yy_meta[48] =
+static const YY_CHAR yy_meta[43] =
     {   0,
         1,    1,    2,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    3,    1,    1,    1,
-        1,    3,    3,    1,    1,    1,    3,    3,    3,    3,
+        1,    1,    1,    1,    1,    3,    1,    1,    1,    1,
+        3,    3,    3,    1,    1,    3,    3,    3,    3,    3,
         3,    3,    3,    3,    3,    3,    3,    3,    3,    3,
-        3,    3,    3,    3,    1,    1,    1
+        1,    1
     } ;
 
-static const flex_int16_t yy_base[127] =
+static const flex_int16_t yy_base[73] =
     {   0,
-        0,    0,   45,   46,  159,  160,   48,   50,  138,   49,
-      137,  149,  130,  160,  160,  134,   43,  160,   44,   49,
-       44,  160,  133,  132,  131,    0,  160,  160,  111,   33,
-      111,  112,   32,   40,  116,  108,  112,  160,   98,  160,
-      160,  160,  127,   76,  160,   57,   68,    0,  160,  160,
-      134,    0,  160,  160,  160,  160,  160,  160,    0,  160,
-       63,   66,   73,  160,  160,  160,    0,  110,  113,  102,
-       96,   97,   98,   96,    0,   93,   92,   98,   97,  160,
-      160,  160,    0,   75,   87,  113,  112,  101,   88,   85,
-       97,   93,   96,    0,    0,   80,   91,   84,  102,  100,
-
-       79,    0,   77,   69,    0,   62,   63,    0,   69,    0,
-       59,   64,    0,   54,    0,   46,    0,    0,   53,    0,
-      160,  106,  109,  112,   73,  115
+        0,    0,   85,   86,   41,   43,   65,   78,    0,   86,
+       86,   86,   86,   86,   86,   86,   86,   33,   86,   63,
+       62,   61,    0,    0,    0,   86,   86,   42,   45,   18,
+       19,   25,   40,   28,   37,   44,   86,   86,   55,   86,
+       69,   86,    0,   56,   46,   86,   86,   86,    0,   29,
+        0,    0,    0,   26,    0,    0,    0,   25,    0,    0,
+        0,   26,    0,   45,    0,    0,    0,    0,   86,   67,
+       70,   45
     } ;
 
-static const flex_int16_t yy_def[127] =
+static const flex_int16_t yy_def[73] =
     {   0,
-      121,    1,  122,  122,  121,  121,  121,  121,  121,  123,
-      121,  121,  124,  121,  121,  121,  121,  121,  121,  121,
-      121,  121,  121,  121,  121,  125,  121,  121,  125,  125,
-      125,  125,  125,  125,  125,  125,  125,  121,  121,  121,
-      121,  121,  121,  121,  121,  123,  123,  123,  121,  121,
-      121,  124,  121,  121,  121,  121,  121,  121,  126,  121,
-      121,  121,  121,  121,  121,  121,  125,  125,  125,  125,
-      125,  125,  125,  125,  125,  125,  125,  125,  125,  121,
-      121,  121,  126,  121,  121,  121,  121,  125,  125,  125,
-      125,  125,  125,  125,  125,  125,  125,  125,  121,  121,
-
-      125,  125,  125,  125,  125,  125,  125,  125,  125,  125,
-      125,  125,  125,  125,  125,  125,  125,  125,  125,  125,
-        0,  121,  121,  121,  121,  121
+       69,    1,   69,   69,   69,   69,   69,   70,   71,   69,
+       69,   69,   69,   69,   69,   69,   69,   69,   69,   69,
+       69,   69,   72,   72,   72,   69,   69,   72,   72,   72,
+       72,   72,   72,   72,   72,   72,   69,   69,   69,   69,
+       70,   69,   71,   69,   69,   69,   69,   69,   72,   72,
+       72,   72,   72,   72,   72,   72,   72,   72,   72,   72,
+       72,   72,   72,   69,   72,   72,   72,   72,    0,   69,
+       69,   69
     } ;
 
-static const flex_int16_t yy_nxt[208] =
+static const flex_int16_t yy_nxt[129] =
     {   0,
-        6,    7,    8,    9,   10,   11,   12,   13,   14,   15,
-       16,   17,   18,   19,    6,   20,   21,   22,   23,   24,
-       25,   26,   26,   27,    6,   28,   26,   29,   30,   31,
-       32,   33,   26,   34,   26,   26,   26,   26,   35,   26,
-       26,   26,   36,   37,   38,   39,   40,   42,   42,   44,
-       44,   44,   44,   47,   54,   43,   43,   56,   61,   58,
-       62,   47,   55,   57,   59,   69,   63,   73,   60,   74,
-       70,   75,   47,   48,   63,   67,   76,   44,   44,   84,
-       61,   48,   62,  120,   86,   85,   86,  119,   63,   87,
-      118,   84,   48,   85,  117,  116,   63,   85,   99,  115,
+        4,    5,    6,    7,    8,    9,   10,   11,   12,   13,
+       14,   15,   16,    4,   17,   18,   19,   20,   21,   22,
+       23,   24,   25,   26,   27,   28,   29,   23,   30,   31,
+       23,   32,   23,   23,   23,   33,   34,   35,   23,   36,
+       37,   38,   39,   39,   39,   39,   44,   49,   45,   52,
+       53,   54,   55,   56,   57,   60,   39,   39,   58,   44,
+       64,   45,   68,   67,   66,   65,   61,   41,   41,   41,
+       43,   64,   43,   42,   63,   62,   59,   51,   50,   48,
+       47,   46,   42,   40,   69,    3,   69,   69,   69,   69,
+       69,   69,   69,   69,   69,   69,   69,   69,   69,   69,
 
-       99,  114,  113,  100,  112,   85,   41,   41,   41,   46,
-      111,   46,   51,  110,   51,   83,  100,   83,  100,  109,
-      108,  107,  106,  105,  104,  103,  102,  101,   87,   87,
-       98,   97,   96,   95,   94,   93,   92,   91,   90,   89,
-       88,   82,   81,   80,   79,   78,   77,   72,   71,   68,
-       66,   65,   64,   53,   52,   50,   49,   45,  121,    5,
-      121,  121,  121,  121,  121,  121,  121,  121,  121,  121,
-      121,  121,  121,  121,  121,  121,  121,  121,  121,  121,
-      121,  121,  121,  121,  121,  121,  121,  121,  121,  121,
-      121,  121,  121,  121,  121,  121,  121,  121,  121,  121,
-
-      121,  121,  121,  121,  121,  121,  121
+       69,   69,   69,   69,   69,   69,   69,   69,   69,   69,
+       69,   69,   69,   69,   69,   69,   69,   69,   69,   69,
+       69,   69,   69,   69,   69,   69,   69,   69
     } ;
 
-static const flex_int16_t yy_chk[208] =
+static const flex_int16_t yy_chk[129] =
     {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    3,    4,    7,
-        7,    8,    8,   10,   17,    3,    4,   19,   21,   20,
-       21,   46,   17,   19,   20,   30,   21,   33,   20,   33,
-       30,   34,   47,   10,   21,  125,   34,   44,   44,   61,
-       62,   46,   62,  119,   63,   61,   63,  116,   62,   63,
-      114,   84,   47,   61,  112,  111,   62,   84,   85,  109,
+        1,    1,    5,    5,    6,    6,   18,   72,   18,   30,
+       30,   31,   31,   31,   32,   34,   39,   39,   32,   45,
+       64,   45,   62,   58,   54,   50,   34,   70,   70,   70,
+       71,   44,   71,   41,   36,   35,   33,   29,   28,   22,
+       21,   20,    8,    7,    3,   69,   69,   69,   69,   69,
+       69,   69,   69,   69,   69,   69,   69,   69,   69,   69,
 
-       85,  107,  106,   85,  104,   84,  122,  122,  122,  123,
-      103,  123,  124,  101,  124,  126,  100,  126,   99,   98,
-       97,   96,   93,   92,   91,   90,   89,   88,   87,   86,
-       79,   78,   77,   76,   74,   73,   72,   71,   70,   69,
-       68,   51,   43,   39,   37,   36,   35,   32,   31,   29,
-       25,   24,   23,   16,   13,   12,   11,    9,    5,  121,
-      121,  121,  121,  121,  121,  121,  121,  121,  121,  121,
-      121,  121,  121,  121,  121,  121,  121,  121,  121,  121,
-      121,  121,  121,  121,  121,  121,  121,  121,  121,  121,
-      121,  121,  121,  121,  121,  121,  121,  121,  121,  121,
-
-      121,  121,  121,  121,  121,  121,  121
+       69,   69,   69,   69,   69,   69,   69,   69,   69,   69,
+       69,   69,   69,   69,   69,   69,   69,   69,   69,   69,
+       69,   69,   69,   69,   69,   69,   69,   69
     } ;
 
 /* Table of booleans, true if rule could match eol. */
-static const flex_int32_t yy_rule_can_match_eol[56] =
+static const flex_int32_t yy_rule_can_match_eol[45] =
     {   0,
-0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,     };
+0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+    0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+    0, 0, 0, 0, 0,     };
 
 static yy_state_type yy_last_accepting_state;
 static char *yy_last_accepting_cpos;
@@ -553,15 +515,20 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#linea 1 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-#linea 4 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-#include "scanner.h"
-#linea 559 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/build/scanner.c"
+#line 1 "lexer.l"
+#line 2 "lexer.l"
+#include "ast.h"
+#include "parser.tab.h"
+#include <string.h>
 
-#linea 561 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/build/scanner.c"
+#define LEX_ERROR(msg) fprintf(stderr, "\033[1;31mLexic Error:\033[0m " msg " '%s' at linea %d\n", yytext, yylineno)
+
+extern int yylineno;
+void yyerror(const char *s);
+#line 528 "lex.yy.c"
+#line 529 "lex.yy.c"
 
 #define INITIAL 0
-#define COMMENT 1
 
 #ifndef YY_NO_UNISTD_H
 /* Special case for "unistd.h", since it is non-ANSI. We include it way
@@ -604,7 +571,7 @@ char *yyget_text ( void );
 
 int yyget_lineno ( void );
 
-void yyset_lineno ( int _linea  );
+void yyset_lineno ( int _line_number  );
 
 /* Macros after this point can all be overridden by user definitions in
  * section 1.
@@ -776,10 +743,9 @@ YY_DECL
 		}
 
 	{
-#linea 14 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
+#line 20 "lexer.l"
 
-
-#linea 782 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/build/scanner.c"
+#line 748 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -806,13 +772,13 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 122 )
+				if ( yy_current_state >= 70 )
 					yy_c = yy_meta[yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
 			++yy_cp;
 			}
-		while ( yy_base[yy_current_state] != 160 );
+		while ( yy_base[yy_current_state] != 86 );
 
 yy_find_action:
 		yy_act = yy_accept[yy_current_state];
@@ -848,290 +814,229 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#linea 16 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ BEGIN(COMMENT); }
+#line 21 "lexer.l"
+{ /* comentario, ignorar*/}
 	YY_BREAK
 case 2:
+/* rule 2 can match eol */
 YY_RULE_SETUP
-#linea 17 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ BEGIN(INITIAL); }
+#line 22 "lexer.l"
+{ /* espacios, ignorar*/}
 	YY_BREAK
 case 3:
-/* rule 3 can match eol */
 YY_RULE_SETUP
-#linea 18 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ /* yylineno se actualiza automáticamente */ }
+#line 24 "lexer.l"
+{ return INT; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#linea 19 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ /* descartar contenido de comentario */ }
-	YY_BREAK
-case YY_STATE_EOF(COMMENT):
-#linea 20 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ return TOK_ERROR; }
+#line 25 "lexer.l"
+{ return FLOAT; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#linea 22 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ /* comentario de línea */ }
+#line 26 "lexer.l"
+{ return STRING; }
 	YY_BREAK
 case 6:
-/* rule 6 can match eol */
 YY_RULE_SETUP
-#linea 24 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ /* ignorar espacios */ }
+#line 27 "lexer.l"
+{ return BOOL;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#linea 26 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ return TOK_KW_INT; }
+#line 28 "lexer.l"
+{ return ARRAY; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#linea 27 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ return TOK_KW_FLOAT; }
+#line 30 "lexer.l"
+{ return IF; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#linea 28 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ return TOK_KW_DOUBLE; }
+#line 31 "lexer.l"
+{ return ELSIF; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#linea 29 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ return TOK_KW_CHAR; }
+#line 32 "lexer.l"
+{ return ELSE; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#linea 30 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ return TOK_KW_VOID; }
+#line 33 "lexer.l"
+{ return WHILE; }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#linea 31 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ return TOK_KW_IF; }
+#line 34 "lexer.l"
+{ return FOR; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#linea 32 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ return TOK_KW_ELSE; }
+#line 36 "lexer.l"
+{ return FUNCTION; }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#linea 33 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ return TOK_KW_WHILE; }
+#line 37 "lexer.l"
+{ return RETURN; }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#linea 34 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ return TOK_KW_FOR; }
+#line 39 "lexer.l"
+{ return PRINT; }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#linea 35 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ return TOK_KW_RETURN; }
+#line 40 "lexer.l"
+{ return READ; }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#linea 36 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ return TOK_KW_BREAK; }
+#line 42 "lexer.l"
+{ yylval.ival =  1; return TRUE_LIT;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#linea 37 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ return TOK_KW_CONTINUE; }
+#line 43 "lexer.l"
+{ yylval.ival =  0; return FALSE_LIT;}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#linea 39 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ return TOK_INC; }
+#line 45 "lexer.l"
+{ yylval.fval = atof(yytext); return FLOAT_LIT;}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#linea 40 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ return TOK_DEC; }
+#line 46 "lexer.l"
+{ yylval.ival = atoi(yytext); return INT_LIT;}
 	YY_BREAK
 case 21:
+/* rule 21 can match eol */
 YY_RULE_SETUP
-#linea 41 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ return TOK_PLUS_ASSIGN; }
+#line 48 "lexer.l"
+{ yylval.sval = strdup(yytext); return STRING_LIT;}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#linea 42 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ return TOK_MINUS_ASSIGN; }
+#line 50 "lexer.l"
+{ return EQ; }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#linea 43 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ return TOK_MUL_ASSIGN; }
+#line 51 "lexer.l"
+{ return NEQ; }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#linea 44 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ return TOK_DIV_ASSIGN; }
+#line 52 "lexer.l"
+{ return GEQ; }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#linea 45 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ return TOK_MOD_ASSIGN; }
+#line 53 "lexer.l"
+{ return LEQ; }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#linea 46 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ return TOK_EQ; }
+#line 54 "lexer.l"
+{ return GT; }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#linea 47 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ return TOK_NEQ; }
+#line 55 "lexer.l"
+{ return LT; }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#linea 48 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ return TOK_LE; }
+#line 56 "lexer.l"
+{ return PLUS; }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#linea 49 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ return TOK_GE; }
+#line 57 "lexer.l"
+{ return MINUS; }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#linea 50 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ return TOK_AND; }
+#line 58 "lexer.l"
+{ return MULT; }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#linea 51 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ return TOK_OR; }
+#line 59 "lexer.l"
+{ return DIV; }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#linea 53 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ return TOK_ASSIGN; }
+#line 60 "lexer.l"
+{ return MOD; }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#linea 54 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ return TOK_LT; }
+#line 61 "lexer.l"
+{ return ASSIGN; }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#linea 55 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ return TOK_GT; }
+#line 63 "lexer.l"
+{ return LBRACE; }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#linea 56 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ return TOK_NOT; }
+#line 64 "lexer.l"
+{ return RBRACE; }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#linea 57 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ return TOK_PLUS; }
+#line 65 "lexer.l"
+{ return LPAREN; }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#linea 58 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ return TOK_MINUS; }
+#line 66 "lexer.l"
+{ return RPAREN; }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#linea 59 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ return TOK_MUL; }
+#line 67 "lexer.l"
+{ return LBRACK; }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#linea 60 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ return TOK_DIV; }
+#line 68 "lexer.l"
+{ return RBRACK; }
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#linea 61 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ return TOK_MOD; }
+#line 69 "lexer.l"
+{ return COMMA; }
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#linea 63 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ return TOK_LPAREN; }
+#line 70 "lexer.l"
+{ return SEMI; }
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#linea 64 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ return TOK_RPAREN; }
+#line 72 "lexer.l"
+{ yylval.sval = strdup(yytext); return ID;}
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#linea 65 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ return TOK_LBRACE; }
+#line 75 "lexer.l"
+{ LEX_ERROR("unknown character"); }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#linea 66 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ return TOK_RBRACE; }
-	YY_BREAK
-case 45:
-YY_RULE_SETUP
-#linea 67 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ return TOK_LBRACKET; }
-	YY_BREAK
-case 46:
-YY_RULE_SETUP
-#linea 68 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ return TOK_RBRACKET; }
-	YY_BREAK
-case 47:
-YY_RULE_SETUP
-#linea 69 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ return TOK_COMMA; }
-	YY_BREAK
-case 48:
-YY_RULE_SETUP
-#linea 70 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ return TOK_SEMICOLON; }
-	YY_BREAK
-case 49:
-YY_RULE_SETUP
-#linea 72 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ return TOK_FLOAT_LITERAL; }
-	YY_BREAK
-case 50:
-YY_RULE_SETUP
-#linea 73 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ return TOK_INT_LITERAL; }
-	YY_BREAK
-case 51:
-YY_RULE_SETUP
-#linea 74 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ return TOK_CHAR_LITERAL; }
-	YY_BREAK
-case 52:
-YY_RULE_SETUP
-#linea 75 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ return TOK_STRING_LITERAL; }
-	YY_BREAK
-case 53:
-YY_RULE_SETUP
-#linea 76 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ return TOK_IDENTIFIER; }
-	YY_BREAK
-case YY_STATE_EOF(INITIAL):
-#linea 78 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ return TOK_EOF; }
-	YY_BREAK
-case 54:
-YY_RULE_SETUP
-#linea 80 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-{ return TOK_ERROR; }
-	YY_BREAK
-case 55:
-YY_RULE_SETUP
-#linea 82 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
+#line 76 "lexer.l"
 ECHO;
 	YY_BREAK
-#linea 1134 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/build/scanner.c"
+#line 1037 "lex.yy.c"
+case YY_STATE_EOF(INITIAL):
+	yyterminate();
 
 	case YY_END_OF_BUFFER:
 		{
@@ -1426,7 +1331,7 @@ static int yy_get_next_buffer (void)
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 122 )
+			if ( yy_current_state >= 70 )
 				yy_c = yy_meta[yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
@@ -1454,11 +1359,11 @@ static int yy_get_next_buffer (void)
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 122 )
+		if ( yy_current_state >= 70 )
 			yy_c = yy_meta[yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
-	yy_is_jam = (yy_current_state == 121);
+	yy_is_jam = (yy_current_state == 69);
 
 		return yy_is_jam ? 0 : yy_current_state;
 }
@@ -1965,7 +1870,7 @@ static void yynoreturn yy_fatal_error (const char* msg )
 
 /* Accessor  methods (get/set functions) to struct members. */
 
-/** Get the current linea number.
+/** Get the current line number.
  * 
  */
 int yyget_lineno  (void)
@@ -2007,14 +1912,14 @@ char *yyget_text  (void)
         return yytext;
 }
 
-/** Set the current linea number.
- * @param _linea linea number
+/** Set the current line number.
+ * @param _line_number line number
  * 
  */
-void yyset_lineno (int  _linea )
+void yyset_lineno (int  _line_number )
 {
     
-    yylineno = _linea;
+    yylineno = _line_number;
 }
 
 /** Set the input stream. This does not discard the current
@@ -2146,6 +2051,5 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#linea 82 "/home/picruz/Documentos/Escuela/Sexto_Semestre/Compiladores/Compilador-C/compilers_lab/lalr_1/src/scanner.l"
-
+#line 76 "lexer.l"
 
