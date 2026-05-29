@@ -37,7 +37,7 @@ parser.tab.o: parser.tab.c parser.tab.h
  
 #  5. Linkear 
 $(TARGET): $(OBJS)
-	$(CXX) $(CXXFLAGS) $(OBJS) -o $(TARGET) -lfl
+	$(CXX) $(CXXFLAGS) $(OBJS) -o $(TARGET)
  
 #  Utilidades 
 clean:
