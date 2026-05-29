@@ -1,0 +1,2 @@
+# Hashes of file build rules.
+5c4de333d304e38bbedff10781fc428b scanner.c

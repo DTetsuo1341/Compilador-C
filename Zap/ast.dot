@@ -1,0 +1,28 @@
+digraph AST {
+    node [shape=box, fontname="monospace"];
+    0 [label="Program"];
+    1 [label="Declaration\na"];
+    0 -> 1;
+    2 [label="Type\nint"];
+    1 -> 2;
+    3 [label="Integer\n10"];
+    1 -> 3;
+    4 [label="Declaration\nb"];
+    0 -> 4;
+    5 [label="Type\nflt"];
+    4 -> 5;
+    6 [label="Float\n3.140000"];
+    4 -> 6;
+    7 [label="Function\nfn suma"];
+    0 -> 7;
+    8 [label="Statement List"];
+    7 -> 8;
+    9 [label="Return\nrt"];
+    8 -> 9;
+    10 [label="Operation\n+"];
+    9 -> 10;
+    11 [label="Identifier\na"];
+    10 -> 11;
+    12 [label="Identifier\nb"];
+    10 -> 12;
+}
