@@ -313,24 +313,3 @@ void yyerror(const char *s) {
               << " at linea " << yylineno
               << std::endl;
 }
-
-int main() {
-    std::cout << "--- Iniciando Zap Parser ---" << std::endl;
-    if (yyparse() == 0) {
-        if (root) {
-            std::cout << "\n--- Analisis Sintactico Exitoso. Iniciando Analisis Semnatico... ---" << std::endl;
-            
-            SemanticAnalyzer analyzer;
-            analyzer.analyze(root);
-            
-            analyzer.print_results();
-            
-            if (!analyzer.has_errors()) { 
-                std::cout << "\n--- Decorado AST: ---" << std::endl;
-                root->print();
-                root->gen_dot("ast.dot");
-            }
-        }
-    }
-    return 0;
-}

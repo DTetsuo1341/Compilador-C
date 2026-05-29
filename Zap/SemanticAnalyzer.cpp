@@ -122,6 +122,8 @@ DataType SemanticAnalyzer::stringToDataType(const std::string& type_str) {
  */
 DataType SemanticAnalyzer::get_priority_type(DataType t1, DataType t2) {
     if (t1 == DataType::ERROR || t2 == DataType::ERROR) return DataType::ERROR;
+    if (t1 == DataType::UNKNOWN) return t2;
+    if (t2 == DataType::UNKNOWN) return t1;
     if (t1 == t2) return t1;
 
     if (t1 == DataType::FLOAT && (t2 == DataType::INT || t2 == DataType::BOOL)) return DataType::FLOAT;
@@ -141,14 +143,18 @@ DataType SemanticAnalyzer::get_priority_type(DataType t1, DataType t2) {
  * @param context Contexto del error.
  * @param linea Línea del error.
  */
-void SemanticAnalyzer::check_types(DataType expected, DataType actual, const std::string& context, int linea) {
+void SemanticAnalyzer::check_types(DataType expected, DataType actual,
+                                    const std::string& context, int linea) {
     if (expected == DataType::ERROR || actual == DataType::ERROR) return;
+    if (actual == DataType::UNKNOWN) return;
     if (expected == actual) return;
-
-    if (expected == DataType::INT && actual == DataType::BOOL) return;
-    if (expected == DataType::FLOAT && (actual == DataType::INT || actual == DataType::BOOL)) return;
-
-    report_error("Tipo distinto " + context + ".", linea);
+ 
+    // Promociones implícitas permitidas
+    if (expected == DataType::INT   && actual == DataType::BOOL)  return;
+    if (expected == DataType::FLOAT && actual == DataType::INT)   return;
+    if (expected == DataType::FLOAT && actual == DataType::BOOL)  return;
+ 
+    report_error("Tipo incompatible en " + context + ".", linea);
 }
 
 /**
@@ -192,11 +198,40 @@ void SemanticAnalyzer::analyze(Node* node) {
         node->evaluated_type = (int)DataType::BOOL;
         return;
     }
+    if (node->kind == "Call") { handle_call(node); return; }
 
     for (auto child : node->children) {
         analyze(child);
     }
 }
+
+DataType SemanticAnalyzer::infer_return_type(Node* node) {
+    if (!node) return DataType::VOID;
+ 
+    // No entrar en funciones anidadas (no es legal en Zap, pero por robustez)
+    if (node->kind == "Function") return DataType::VOID;
+ 
+    if (node->kind == "Return") {
+        if (!node->children.empty()) {
+            DataType t = (DataType)node->children[0]->evaluated_type;
+            // Si el hijo no fue evaluado (-1) o dio ERROR, reportar VOID
+            if ((int)t < 0 || t == DataType::ERROR) return DataType::VOID;
+            return t;
+        }
+        return DataType::VOID;   // rt; sin expresión → void
+    }
+ 
+    DataType result = DataType::VOID;
+    for (Node* child : node->children) {
+        DataType child_type = infer_return_type(child);
+        if (child_type == DataType::VOID) continue;
+        result = (result == DataType::VOID)
+                   ? child_type
+                   : get_priority_type(result, child_type);
+    }
+    return result;
+}
+
 
 /**
  * @brief Maneja declaraciones de variables.
@@ -293,11 +328,12 @@ void SemanticAnalyzer::handle_loop(Node* node) {
  */
 void SemanticAnalyzer::handle_function(Node* node) {
     std::string func_name = node->value.substr(3);
-
-    table.insert(func_name, Category::FUNCTION, DataType::VOID);
-
+ 
+    // Insertar con UNKNOWN primero para permitir recursión
+    table.insert(func_name, Category::FUNCTION, DataType::UNKNOWN);
     table.push_scope();
-
+ 
+    // Registrar parámetros y analizar cuerpo
     for (auto child : node->children) {
         if (child->kind == "Parameters") {
             for (auto param : child->children) {
@@ -308,6 +344,47 @@ void SemanticAnalyzer::handle_function(Node* node) {
             analyze(child);
         }
     }
-
+ 
+    //  Inferencia de tipo de retorno 
+    // Ahora que el cuerpo está analizado, los nodos Return tienen
+    // evaluated_type. Recolectamos el tipo dominante.
+    DataType ret_type = DataType::UNKNOWN;
+    for (auto child : node->children) {
+        if (child->kind == "Parameters") continue;
+        DataType t = infer_return_type(child);
+        if (t == DataType::UNKNOWN) continue;
+        ret_type = (ret_type == DataType::UNKNOWN)
+                     ? t
+                     : get_priority_type(ret_type, t);
+    }
+ 
+    // Actualizar el símbolo con el tipo real
+    // (lookup busca desde el scope actual hacia afuera; la función
+    //  fue insertada en el scope previo al push, así que pop primero)
     table.pop_scope();
+ 
+    auto sym = table.lookup(func_name);
+    if (sym) sym->type = ret_type;
+}
+
+
+void SemanticAnalyzer::handle_call(Node* node) {
+    // Verificar que la función existe
+    auto sym = table.lookup(node->value);
+    if (!sym || sym->category != Category::FUNCTION) {
+        report_error("Llamada a funcion no declarada '"
+                     + node->value + "'.", node->linea);
+        node->evaluated_type = (int)DataType::ERROR;
+        return;
+    }
+ 
+    // Analizar argumentos
+    for (Node* child : node->children)
+        analyze(child);
+ 
+    // El tipo del nodo Call es el tipo de retorno de la función.
+    // Si la función aún no fue analizada (orden de declaración),
+    // quedará como VOID y check_types lo tolerará; se resuelve
+    // en el segundo análisis de ese símbolo.
+    node->evaluated_type = (int)sym->type;
 }
