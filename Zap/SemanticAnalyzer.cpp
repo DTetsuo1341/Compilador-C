@@ -81,7 +81,7 @@ bool SemanticAnalyzer::has_errors() const {
  */
 void SemanticAnalyzer::print_results() const {
     if (errors.empty()) {
-        std::cout << "\033[1;32m[SEMANTIC] Exito: No se encontró ningún error semántico.\033[0m\n";
+        // std::cout << "\033[1;32m[SEMANTIC] Exito: No se encontró ningún error semántico.\033[0m\n";
     } else {
         std::cout << "\033[1;31m[SEMANTIC] Encontrado " << errors.size() << " error(es):\033[0m\n";
         for (const auto& err : errors) {
